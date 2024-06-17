@@ -224,6 +224,6 @@ This project sets up a homelab to simulate an enterprise environment using Windo
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/c070e78c-11a2-4b6d-a648-2688d09ae325" width="500" />
 
 ### Splunk Queries
-> I am going to add a separate project that focuses on SIEM tools like Splunk and showcase queries, alerts, and dashboards there. But just to show a quick query, I will look for the recent user I created called **splunkadmin**.
+> I am going to dive deep and add a separate project that focuses on SIEM tools like Splunk and showcase queries, alerts, and dashboards there. But just to show a very basic and quick query, I will look for the recent user I created called **splunkadmin**. 
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/e88d8dd4-dde6-4513-a89a-4ce4c97e3102" width="800" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/25d3e90f-5f33-4413-b8be-33d9e80dcdda" width="500" />
