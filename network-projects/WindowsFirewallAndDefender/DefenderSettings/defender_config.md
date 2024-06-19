@@ -13,7 +13,7 @@ The following settings were configured to enhance security:
 - Controlled folder access (to protect against ransomware)
 - Various Group Policy settings for Microsoft Defender Antivirus
 
-**Note:** Some of these settings may impact system performance.
+> **Note:** Some of these settings may impact system performance.
 
 ## Windows Defender Settings
 
@@ -89,4 +89,3 @@ Controlled folder access helps protect your data from ransomware by blocking una
 ## Conclusion
 
 By following these steps, you can significantly enhance the security posture of your Windows 10 Enterprise system. Be mindful of the potential performance impacts and adjust settings as necessary to find the right balance for your environment.
-![defender 1](
