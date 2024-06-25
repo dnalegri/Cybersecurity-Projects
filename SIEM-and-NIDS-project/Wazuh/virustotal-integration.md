@@ -88,5 +88,15 @@
 5. Restart the Wazuh manager to apply changes:
     ```sh
     sudo systemctl restart wazuh-manager
-        
-                
+
+## Testing the Alert
+To test the alert and trigger the VirusTotal integration, use the following command to download the EICAR test file into the monitored directory:
+   ```sh
+   sudo curl -Lo /home/dnalegri/Downloads/eicar.com https://secure.eicar.org/eicar.com && sudo ls -lah /home/dnalegri/Downloads/eicar.com
+```
+This command will:
+- Use curl to download the EICAR test file from the specified URL.
+- Save the file into the /home/dnalegri/Downloads directory, which is being monitored by Wazuh.
+- List the details of the downloaded file to confirm its presence.
+
+By placing the EICAR test file in this directory, it should trigger the Wazuh File Integrity Monitoring (FIM) alert, which will then invoke the VirusTotal integration to check the file. If VirusTotal flags the file as malicious, the configured active response script remove-threat.sh will attempt to remove it, and the corresponding alerts will be generated in Wazuh.
