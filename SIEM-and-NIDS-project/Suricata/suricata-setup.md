@@ -18,11 +18,11 @@
    ```sh
    sudo nano /etc/suricata/suricata.yaml
 
-- Set the HOME_NET variable:
+- Set the HOME_NET variable to your machine's IP:
   ```sh
   home-net: "[192.168.0.0/24]"
 
-- Ensure the interface is set to eth0 in the af-packet and pcap sections:
+- Ensure the interface is set to your machine's interface *(mine is eth0)* in the af-packet and pcap sections:
     ```sh
     af-packet:
   - interface: eth0
