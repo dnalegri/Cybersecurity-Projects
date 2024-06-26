@@ -7,16 +7,16 @@
      <disabled>no</disabled>
    </syscheck>
 
-2. Add an entry within the <syscheck> block to configure a directory to be monitored in near real-time. In this case, monitoring the /home/dnalegri/Downloads directory (dnalegri is my user):
+2. Add an entry within the <syscheck> block to configure a directory to be monitored in near real-time. In this case, monitoring the `/home/dnalegri/Downloads` directory (dnalegri is my user):
    ```xml
    <directories realtime="yes">/home/dnalegri/Downloads</directories>
 3. Make sure 'jq' is installed:
    ```sh
    sudo apt-get install jq
-4. Create the '/var/ossec/active-response/bin/remove-threat.sh active response script to remove malicious files from the endpoint
+4. Create the `/var/ossec/active-response/bin/remove-threat.sh` active response script to remove malicious files from the endpoint
    > remove-threat.sh is listed in this folder
   
-6. Change the /var/ossec/active-response/bin/remove-threat.sh file ownership and permissions:
+6. Change the `/var/ossec/active-response/bin/remove-threat.sh` file ownership and permissions:
    ```sh
    sudo chmod 750 /var/ossec/active-response/bin/remove-threat.sh
    sudo chown root:wazuh /var/ossec/active-response/bin/remove-threat.sh
@@ -25,7 +25,7 @@
    sudo systemctl restart wazuh-agent
 
 ### Configuration on Wazuh Server
-1. Add the following rules to the /var/ossec/etc/rules/local_rules.xml file on the Wazuh server. These rules alert about changes in the /home/dnalegri/Downloads directory that are detected by FIM scans:
+1. Add the following rules to the `/var/ossec/etc/rules/local_rules.xml` file on the Wazuh server. These rules alert about changes in the `/home/dnalegri/Downloads` directory that are detected by FIM scans:
 ```xml
 <group name="syscheck,pci_dss_11.5,nist_800_53_SI.7,">
   <!-- Rules for Linux systems -->
@@ -41,7 +41,7 @@
   </rule>
 </group>
 ```
-2. Add the following configuration to the Wazuh server /var/ossec/etc/ossec.conf file to enable the VirusTotal integration. Replace <YOUR_VIRUS_TOTAL_API_KEY> with your VirusTotal API key. This allows a VirusTotal query to be triggered whenever any of the rules 100200 and 100201 are triggered:
+2. Add the following configuration to the Wazuh server `/var/ossec/etc/ossec.conf` file to enable the VirusTotal integration. Replace <YOUR_VIRUS_TOTAL_API_KEY> with your VirusTotal API key. This allows a VirusTotal query to be triggered whenever any of the rules 100200 and 100201 are triggered:
 ```xml
 <ossec_config>
   <integration>
@@ -52,7 +52,7 @@
   </integration>
 </ossec_config>
 ```
-3. Append the following blocks to the Wazuh server /var/ossec/etc/ossec.conf file. This enables active response and triggers the remove-threat.sh script when VirusTotal flags a file as malicious:
+3. Append the following blocks to the Wazuh server `/var/ossec/etc/ossec.conf` file. This enables active response and triggers the remove-threat.sh script when VirusTotal flags a file as malicious:
 ```xml
 <ossec_config>
   <command>
@@ -69,7 +69,7 @@
   </active-response>
 </ossec_config>
 ```
-4. Add rules to alert about the active response results in /var/ossec/etc/rules/local_rules.xml:
+4. Add rules to alert about the active response results in `/var/ossec/etc/rules/local_rules.xml`:
 ```xml
 <group name="virustotal,">
   <rule id="100092" level="12">
@@ -96,7 +96,7 @@ To test the alert and trigger the VirusTotal integration, use the following comm
 ```
 This command will:
 - Use curl to download the EICAR test file from the specified URL.
-- Save the file into the /home/dnalegri/Downloads directory, which is being monitored by Wazuh.
+- Save the file into the `/home/dnalegri/Downloads` directory, which is being monitored by Wazuh.
 - List the details of the downloaded file to confirm its presence.
 
 By placing the EICAR test file in this directory, it should trigger the Wazuh File Integrity Monitoring (FIM) alert, which will then invoke the VirusTotal integration to check the file. If VirusTotal flags the file as malicious, the configured active response script remove-threat.sh will attempt to remove it, and the corresponding alerts will be generated in Wazuh.
