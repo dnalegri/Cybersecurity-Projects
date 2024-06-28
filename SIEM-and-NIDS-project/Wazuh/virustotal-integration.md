@@ -100,3 +100,8 @@ This command will:
 - List the details of the downloaded file to confirm its presence.
 
 By placing the EICAR test file in this directory, it should trigger the Wazuh File Integrity Monitoring (FIM) alert, which will then invoke the VirusTotal integration to check the file. If VirusTotal flags the file as malicious, the configured active response script remove-threat.sh will attempt to remove it, and the corresponding alerts will be generated in Wazuh.
+
+## Documentation
+> Below is the EICAR test visualized in Wazuh. They were effectively removed from the Kali endpoint as per the configuration.
+
+![fim test](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/888403a2-4d4e-4c1c-9f30-88674cf9cf06)
