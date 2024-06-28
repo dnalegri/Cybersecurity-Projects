@@ -28,3 +28,7 @@
      rule.groups:suricata
 
 > Wazuh automatically parses data from /var/log/suricata/eve.json and generates related alerts on the Wazuh dashboard
+## Documentation
+> Below are the images from teh Wazuh agent dashboard, showing the successful integration of Suricata. The ICMP pings alerted in Wazuh.
+![icmp ping suri 2](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/a70d050f-79cf-4752-af56-3ac7de897730)
+![icmp ping suri](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/bf265090-a662-48ee-aa0e-97b4b2e6af38)
