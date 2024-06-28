@@ -1,5 +1,4 @@
-# Windows Server 2022 with AD, DHCP, DNS, and Splunk Monitoring
-
+# Windows Server 2022 with AD, DHCP, DNS, and Splunk Monitoring (In Progress)
 ## Overview
 
 This project sets up a homelab to simulate an enterprise environment using Windows Server 2022. It includes a single Domain Controller (DC) with Active Directory (AD), DHCP, and DNS services, and integrates Splunk for Security Information and Event Management (SIEM) alerts. This setup showcases Identity and Access Management (IAM) controls, with users and groups themed around Game of Thrones characters. Additionally, it provides an environment for practicing PowerShell scripting and Splunk Processing Language (SPL).
