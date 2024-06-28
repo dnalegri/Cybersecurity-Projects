@@ -13,3 +13,10 @@
     ```sh
     sudo systemctl start wazuh-agent
     sudo systemctl status wazuh-agent
+
+## Documentation
+> The installation process is listed below as well as the implementation was successful as I was able to pull up the Wazuh dashboard and view the newly active agent. *Note: The dashboard doesn't show FIM because it was not configured yet. FIM test is located in the VirusTotal integration repository.*
+![wazuh install ubuntu 5 kali agent](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/584f029f-ebff-4915-982f-9b041f61371f)
+![wazuh install ubuntu 6 kali agent](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/3b01be77-f2ad-416a-a16b-ed5f67ce02af)
+![wazuh install ubuntu 5](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/6714fea9-93a1-47ae-9475-4ed1b229530b)
+![wazuh install ubuntu 6](https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/020160b9-f9f9-401a-a016-66ce514232b6)
