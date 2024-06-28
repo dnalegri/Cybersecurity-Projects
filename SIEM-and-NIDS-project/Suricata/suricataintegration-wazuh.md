@@ -5,7 +5,7 @@
     cd /var/ossec/etc/
     sudo nano /var/ossec/etc/ossec.conf
 2. **Add the configuration:**
-    ```sh
+    ```xml
     <ossec_config>
       <localfile>
         <log_format>json</log_format>
