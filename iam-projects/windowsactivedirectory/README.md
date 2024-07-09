@@ -175,7 +175,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 
 
 ## Creating AD Users from CSV with Powershell
-> I wanted to implement a way to create a bulk set of users so I did this by first compiling some users into a CSV file by First Name, Last Name, Display Name, Username, Description, Group, OU. Then I opened Powershell ISE to create the script.
+> I wanted to implement a way to create a bulk set of users so I did this by first compiling some users into a CSV file by First Name, Last Name, Display Name, Username, Description, Group, OU. Then I opened Powershell ISE to create the script. I also want to preface that some of the settings here are not for a production environment, like the password never expiring, and not enabling the password to be reset upon login. This is all in a test environment so for ease of use/access to myself I implemented certain settings like the password to never expire. This is just a test lab but it is still important to remember and follow security best practices. In a real environment, users need to reset their passwords based on policies and procedures and also have MFA, etc.
 
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/50ee1850-a709-4616-8b18-5b85a0baa17c" width="600" />
 
