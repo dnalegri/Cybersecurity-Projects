@@ -57,16 +57,16 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 
 ## Initial Setup and Configuration
 
-### Windows Server Static IPv4 IP, DNS IP, & DHCP Scope
+## Windows Server Static IPv4 IP, DNS IP, & DHCP Scope
 
 > I am not going to walk through the installation process of downloading the Windows Server or adding roles (DHCP, DNS). Here I will show the process of how I configured the static IPv4 address of the Windows Server, DNS setup, and DHCP scope.
 ### DHCP Scope
 
-> > Under the Windows Server network settings, I went to change adapter and clicked properties. I can configure the IPv4 address and DNS based on the virtual NAT I created in VMware Pro. Since my Windows server is acting as the DNS, the DNS IP is the same as IPv4.
+Under the Windows Server network settings, I went to change adapter and clicked properties. I can configure the IPv4 address and DNS based on the virtual NAT I created in VMware Pro. Since my Windows server is acting as the DNS, the DNS IP is the same as IPv4.
 > > > *Note*: *When I first created my Windows Server I was unaware that my DNS IP had to be the same as my server's IPv4 to be configured correctly with my single DC setup. I encountered connection errors due to setting my DNS address as 10.0.2.128 instead of the IPv4 of the server itself (10.0.2.10). I realized that the DNS server wasn't connecting correctly because I was using an IP that couldn't be resolved. After all, it didn't exist within my environment. You will see the obsolete DNS address in the screenshots below, but I will show how I updated it.*
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/d2439ecb-b266-419a-a291-026a5eafc5fb" />
 
-> > > > Under tools and DHCP, I go to the manager and create a new scope.
+- Under tools and DHCP, I go to the manager and create a new scope.
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/c342ead5-1a15-4093-9ffe-3a3014fbc0da" width="400"/>
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/9dcf94c0-1b09-4193-8084-d440c1f6e6c2" width="400"/>
@@ -81,7 +81,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/171ebd8e-96c6-4332-af5f-7772b82d1a42" width="400"/>
 </div>
 
->  I ensure that the DHCP Scope options include the correct DNS server (it didn't). So I updated the record 006.
+- I ensure that the DHCP Scope options include the correct DNS server (it didn't). So I updated the record 006.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/fc036163-5dea-4758-aba9-915f12c309ca" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/fbf913b7-4bfc-42b7-b89e-82b04d64ef49" />
 
@@ -89,7 +89,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 > For our DNS to resolve back to the name of our server, there must be an A record present.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/01d42895-8728-4517-8bb8-7571aeb2b0db" width="600" />
 
-> > On the client machine, I did a ping test to verify the DNS record and connection.
+> On the client machine, I did a ping test to verify the DNS record and connection.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/a8eee812-3a26-458e-a8b7-6ee98ccd9fc8" width="400" />
 
 > Under the properties section I also unchecked the IPv6 address since it is not needed in this environment, and I put alternate forwarders for DNS queries that cannot resolve locally to another DNS server (Cloudflare & Google).
@@ -115,11 +115,11 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 > I want to make sure that the DHCP Scope I set up is correctly assigning addresses and that the machine is configured properly with the internal network. I use the *ipconfig /all* cmd to view this information and verify that it's correct.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/42c3f0ac-0f14-431f-ba65-3e76824cc358" width="400" />
 
-> > On the Windows Server, I also verify this under the DHCP Manager.
+> On the Windows Server, I also verify this under the DHCP Manager.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/1c057126-26b7-438c-bb65-7747e9b0f626" width="400" />
 
 ## Creating Users and Groups
-> To link the machine to the domain, I create a user account. Since this is a non-production environment and a homelab, I set the password to never expire for ease of access for myself.
+To link the machine to the domain, I create a user account. Since this is a non-production environment and a homelab, I set the password to never expire for ease of access for myself.
 > > *The entire theme of the users and groups is Game of Thrones as well.*
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/b694a2e6-ba79-458d-959e-8b53e1cadfa7" width="400" />
@@ -129,7 +129,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/a1c4b0bc-18ea-456f-b2ad-22504694bcf1" width="400" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/ac966626-fabc-46a4-999b-b7813d5a324b" width="400" />
 
-> > Now on the machine I link the domain and test the implementation.
+- Now on the machine I link the domain and test the implementation.
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/d1ca5486-c01d-40ba-9a50-d168d8f7f17c" width="500" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/fc29bc12-ad2c-4819-bc2c-a99cbfc9b5b8" width="500" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/4df944fc-28c2-4822-8b4e-3ed9dfe646c4" width="500" />
@@ -140,7 +140,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 
 
 ## Using Powershell to Create Users and Groups
-> I created some users and groups the easy way through the Users and Computers tool in the Active Directory. A crucial skill for me to learn is Powershell for automation and scripting, and in this environment, I can give myself a foundation to learn through trial and error. I wanted to create a group called House Lannister and add some users to that group via Powershell. I also made sure to assign the password and password settings this way.
+I created some users and groups the easy way through the Users and Computers tool in the Active Directory. A crucial skill for me to learn is Powershell for automation and scripting, and in this environment, I can give myself a foundation to learn through trial and error. I wanted to create a group called House Lannister and add some users to that group via Powershell. I also made sure to assign the password and password settings this way.
 
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/e954617e-847d-4ab4-92e5-bc1871cfb664" width="800" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/cb412170-ccf6-4af5-bb22-29bbb9b1fec8" width="800" />
@@ -152,21 +152,21 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/a84615f4-8e41-400f-9f44-8c1cec68c957" width="800" />
   
-  **New-AdUser**: This is the cmdlet used to create a new Active Directory user.
+  - **New-AdUser**: This is the cmdlet used to create a new Active Directory user.
 
-  **-Name** "Tywin Lannister": This specifies the name of the new user. In this case, the user's name is "Tywin Lannister".
+- **-Name** "Tywin Lannister": This specifies the name of the new user. In this case, the user's name is "Tywin Lannister".
 
-  **-SamAccountName "tlannister"**: This sets the Security Account Manager (SAM) account name, which is also known as the user logon name. Here, it is set to *"tlannister"*.
+- **-SamAccountName "tlannister"**: This sets the Security Account Manager (SAM) account name, which is also known as the user logon name. Here, it is set to *"tlannister"*.
 
-  **-AccountPassword $password**: This sets the user's password. The variable $password should contain a secure password object (created using Read-Host -AsSecureString or a similar method).
+- **-AccountPassword $password**: This sets the user's password. The variable $password should contain a secure password object (created using Read-Host -AsSecureString or a similar method).
 
-  **-PasswordNeverExpires $true**: This sets the password to never expire. The value $true indicates that the password will not expire.
+- **-PasswordNeverExpires $true**: This sets the password to never expire. The value $true indicates that the password will not expire.
 
-  **-Description "Lord of Casterly Rock"**: This adds a description to the user's account.
+- **-Description "Lord of Casterly Rock"**: This adds a description to the user's account.
 
-  **-Enabled $true**: This enables the user account immediately upon creation. If set to $false, the account would be created but disabled.
+- **-Enabled $true**: This enables the user account immediately upon creation. If set to $false, the account would be created but disabled.
 
-  **-UserPrincipalName "tlannister@yellow.local"**: This sets the User Principal Name (UPN) for the account, which is often used as the login name.
+- **-UserPrincipalName "tlannister@yellow.local"**: This sets the User Principal Name (UPN) for the account, which is often used as the login name.
   
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/3a56cf85-6b1c-49af-a5bf-272284f4f133" width="400" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/91d2c5cf-0875-4247-bebf-e5a75073154a" width="400"/>
