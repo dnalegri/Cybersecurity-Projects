@@ -141,7 +141,7 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 
 ## Using Powershell to Create Users and Groups
 > I created some users and groups the easy way through the Users and Computers tool in the Active Directory. A crucial skill for me to learn is Powershell for automation and scripting, and in this environment, I can give myself a foundation to learn through trial and error. I wanted to create a group called House Lannister and add some users to that group via Powershell. I also made sure to assign the password and password settings this way.
-> > *Note*: I will be adding more users and groups using Powershell. I want to create a script that has at least 50 users and import the CSV into Powershell. I will update this page as this project grows.
+
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/e954617e-847d-4ab4-92e5-bc1871cfb664" width="800" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/cb412170-ccf6-4af5-bb22-29bbb9b1fec8" width="800" />
 
@@ -171,12 +171,51 @@ This project sets up a homelab to simulate an enterprise environment using Windo
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/3a56cf85-6b1c-49af-a5bf-272284f4f133" width="400" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/91d2c5cf-0875-4247-bebf-e5a75073154a" width="400"/>
 
-> Pictured above, I verified that the Group and Users were created correctly using the command *Get-ADGroup* and *Get-ADUser*
+> Pictured above, I verified that the Group and Users were created correctly using the commands *Get-ADGroup* and *Get-ADUser*
 
-### Creating a File Share
+
+## Creating AD Users from CSV with Powershell
+> I wanted to implement a way to create a bulk set of users so I did this by first compiling some users into a CSV file by First Name, Last Name, Display Name, Username, Description, Group, OU. Then I opened Powershell ISE to create the script.
+
+<img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/50ee1850-a709-4616-8b18-5b85a0baa17c" width="600" />
+
+1. **Import the Active Directory Module**:
+    - `Import-Module ActiveDirectory`: Loads the Active Directory cmdlets necessary to interact with AD.
+
+2. **Create a Secure Password**:
+    - `ConvertTo-SecureString "TESTpassw0rd!" -AsPlainText -Force`: Converts a plain text password into a secure string.
+
+3. **Prompt for CSV File Path**:
+    - `Read-Host -Prompt "Please enter the path to your CSV file"`: Prompts the user to enter the path to the CSV file.
+
+4. **Import the CSV File**:
+    - `Import-Csv $filepath`: Reads the CSV file into a variable `$users`.
+
+5. **Loop Through Each User in the CSV File**:
+    - `ForEach ($user in $users)`: Iterates through each row (user) in the CSV file.
+
+6. **Gather User Information**:
+    - Extracts the first name, last name, display name, username, description, group, and OU from the current row in the CSV file.
+
+7. **Create the AD User**:
+    - `New-ADUser`: Creates a new Active Directory user with the specified properties.
+
+8. **Set the Password to Never Expire**:
+    - `Set-ADUser -Identity $username -PasswordNeverExpires $true`: Sets the password to never expire for the created user.
+
+9. **Add User to AD Group**:
+    - `Add-ADGroupMember -Identity $group -Members $username`: Adds the user to the specified AD group.
+
+10. **Print Confirmation Message**:
+    - `Write-Host`: Prints confirmation messages to the console.
+
+> I ran the implementation and it was successful. To make sure I created another Powershell script to list the latest Users and Groups created. In the screenshots, you will see the information displayed before I combined the two scripts.
+<img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/9d23ca96-b447-46f4-bc65-41442c64a0e5" width="600" />
+<img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/4bafb4f1-4d49-4faf-9150-ca1e0b9a39bd" width="400" />
+
+## Creating a File Share
 
 > I wanted to implement RBAC principles and least privileged access by creating a file share that only one specific group can access. I used House Lannister as the group and created a file share called *Lannister Family Secrets* that had sensitive information that no one besides the Lannisters could access. 
-
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/82424628-57b8-4568-90ad-436d418088f6" width="500" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/acf3e463-7180-4766-abe0-c7a42a59c3d8" width="500" />
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/7918dd91-3848-49b3-b614-93abb3efdf54" width="500" />
@@ -224,6 +263,9 @@ This project sets up a homelab to simulate an enterprise environment using Windo
   <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/c070e78c-11a2-4b6d-a648-2688d09ae325" width="500" />
 
 ### Splunk Queries
-> I am going to dive deep and add a separate project that focuses on SIEM tools like Splunk and showcase queries, alerts, and dashboards there. But just to show a very basic and quick query, I will look for the recent user I created called **splunkadmin**. ALSO bare with me, I know this query is super bare bones and nothing deep for analyzing logs... I'm working on an SPL/Splunk project to explore queries, alerts, and dashboards.
+> I am going to dive deep and add a separate project that focuses on SIEM tools like Splunk and showcase queries, alerts, and dashboards there. But just to show a very basic and quick query, I will look for the recent user I created called **splunkadmin**. ALSO, bear with me, I know this query is super bare bones and nothing deep for analyzing logs... I'm working on an SPL/Splunk project to explore queries, alerts, and dashboards.
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/e88d8dd4-dde6-4513-a89a-4ce4c97e3102" width="800" />
 <img src="https://github.com/dnalegri/Cybersecurity-Projects/assets/164395911/25d3e90f-5f33-4413-b8be-33d9e80dcdda" width="500" />
+
+
+
