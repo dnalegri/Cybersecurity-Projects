@@ -1,0 +1,62 @@
+SecurityEvent // this is the Table
+| where EventID == "4624" // This is the filter (where?)
+| where TimeGenerated >= ago(1h) // filter (cont.)
+| summarize count() by Account // data aggregation
+| order by Account asc // how do we want to order the results (ascending/descending)
+| project Account, SuccessfulLogons = count_ // only want two columns in the results Account and SuccessfulLogins
+
+// The Search Operator
+
+search "testuser"
+| distinct $table // where does the data exist?
+
+search in (OfficeActivity) "testuser" // why does it exist?
+
+search in (Device*) "testuser" // wildcard for Defender for Endpoint tables
+
+// Turning the search into a workflow
+
+OfficeActivity // Table
+| where TimeGenerated > ago(24h) // Filter
+| where UserID has "testuser" 
+| where RecordType == "ExchangeItem"
+| where Operation == "Send"
+| project UserID, ClientIP, OriginatingServer // Control results
+
+
+// Note: getschema produces a list of all the named columns of a specific table
+// that way you can control what columns you want to display with project, or where efforts
+
+OfficeActivity
+| getschema
+// use the columns to manipulate the data
+| where UserType == "Regular"
+| where OfficeWorkload == "Exchange"
+| where Operation == "Send"
+| project UserID, UserDomain
+
+// String predicates: ==, has, contains, startswith, endswith, matches regex, etc
+//  - Contains: Looks for any substring match
+//  - Has: Loks for a spcific word (better performance)
+// Numeric/Date predicates: ==, !=, <, >, <=, >=
+// Empty Predicates: isempty(), notempty(), isnull(), notnull()
+
+// Tilda ~ will tell query to ignore case
+SecurityEvent
+| where AccountType =~ "machine"
+
+// The Where Operator
+SecurityEvent
+| where TimeGenerated > ago(12h)
+| where Computer == "JBOX10"
+| where EventID == "4624"
+| where SubjectUserSid == TargetUserSid // simple terms first then add these last
+| sort by TimeGenerated desc
+
+// Using 'and'
+SecurityEvent
+| where TimeGenerated > ago(12h)
+    and Computer == "JBOX10"
+    and EventID == "4624"
+    and SubjectUserSid == TargetUserSid
+| sort by TimeGenerated desc
