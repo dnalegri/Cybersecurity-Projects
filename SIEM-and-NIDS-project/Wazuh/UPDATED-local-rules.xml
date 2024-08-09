@@ -1,0 +1,177 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
+  -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+</group>
+
+<group name="syscheck,pci_dss_11.5,nist_800_53_SI.7,">
+    <!-- Rules for Linux systems -->
+    <rule id="100200" level="7">
+        <if_sid>550</if_sid>
+        <field name="file">/home/dnalegri/Downloads</field>
+        <description>File modified in /home/dnalegri/Downloads directory.</description>
+    </rule>
+    <rule id="100201" level="7">
+        <if_sid>554</if_sid>
+        <field name="file">/home/dnalegri/Downloads</field>
+        <description>File added to /home/dnalegri/Downloads directory.</description>
+    </rule>
+
+  <!-- New rules for additional directories -->
+  <rule id="100202" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/etc</field>
+    <description>File modified in /etc directory.</description>
+  </rule>
+  <rule id="100203" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/etc</field>
+    <description>File added to /etc directory.</description>
+  </rule>
+
+  <rule id="100204" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/var/www</field>
+    <description>File modified in /var/www directory.</description>
+  </rule>
+  <rule id="100205" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/var/www</field>
+    <description>File added to /var/www directory.</description>
+  </rule>
+
+  <rule id="100206" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/usr/bin</field>
+    <description>File modified in /usr/bin directory.</description>
+  </rule>
+  <rule id="100207" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/usr/bin</field>
+    <description>File added to /usr/bin directory.</description>
+  </rule>
+
+  <rule id="100208" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/usr/sbin</field>
+    <description>File modified in /usr/sbin directory.</description>
+  </rule>
+  <rule id="100209" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/usr/sbin</field>
+    <description>File added to /usr/sbin directory.</description>
+  </rule>
+
+  <rule id="100210" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/boot</field>
+    <description>File modified in /boot directory.</description>
+  </rule>
+  <rule id="100211" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/boot</field>
+    <description>File added to /boot directory.</description>
+  </rule>
+
+  <rule id="100212" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/root</field>
+    <description>File modified in /root directory.</description>
+  </rule>
+  <rule id="100213" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/root</field>
+    <description>File added to /root directory.</description>
+  </rule>
+
+  <rule id="100214" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/usr/local/bin</field>
+    <description>File modified in /usr/local/bin directory.</description>
+  </rule>
+  <rule id="100215" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/usr/local/bin</field>
+    <description>File added to /usr/local/bin directory.</description>
+  </rule>
+
+  <rule id="100216" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/usr/local/sbin</field>
+    <description>File modified in /usr/local/sbin directory.</description>
+  </rule>
+  <rule id="100217" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/usr/local/sbin</field>
+    <description>File added to /usr/local/sbin directory.</description>
+  </rule>
+
+  <rule id="100218" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/opt</field>
+    <description>File modified in /opt directory.</description>
+  </rule>
+  <rule id="100219" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/opt</field>
+    <description>File added to /opt directory.</description>
+  </rule>
+
+  <rule id="100220" level="7">
+    <if_sid>550</if_sid>
+    <field name="file">/var/log</field>
+    <description>File modified in /var/log directory (excluding Suricata).</description>
+    <!-- Example to specifically include or exclude files or directories -->
+    <ignore>/var/log/suricata</ignore>
+    <ignore>/var/log/journal</ignore>
+
+  </rule>
+
+  <rule id="100221" level="7">
+    <if_sid>554</if_sid>
+    <field name="file">/var/log/</field>
+    <description>File added to /var/log directory.</description>
+    <ignore>/var/log/suricata</ignore>
+ </rule>
+</group>
+
+<group name="virustotal,">
+  <rule id="100092" level="12">
+    <if_sid>657</if_sid>
+    <match>Successfully removed threat</match>
+    <description>$(parameters.program) removed threat located at $(parameters.alert.data.virustotal.source.file)</description>
+  </rule>
+
+  <rule id="100093" level="12">
+    <if_sid>657</if_sid>
+    <match>Error removing threat</match>
+    <description>Error removing threat located at $(parameters.alert.data.virustotal.source.file)</description>
+  </rule>
+
+  <!-- Additional rules for active response results -->
+  <rule id="100094" level="12">
+    <if_sid>657</if_sid>
+    <match>Active response command executed successfully</match>
+    <description>Active response command executed successfully on $(parameters.srcip)</description>
+  </rule>
+
+  <rule id="100095" level="12">
+    <if_sid>657</if_sid>
+    <match>Failed to execute active response command</match>
+    <description>Failed to execute active response command on $(parameters.srcip)</description>
+  </rule>
+</group>
