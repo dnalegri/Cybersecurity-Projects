@@ -2,6 +2,8 @@
 
 This project showcases the integration of Wazuh as a Security Information and Event Management (SIEM) system, VirusTotal for malware detection, and Suricata as a Network Intrusion Detection System (NIDS). The setup involves deploying Wazuh and Suricata on different virtual machines and configuring them to work together for comprehensive security monitoring.
 
+## *Updated FIM rules now shown above*
+
 ## Overview
 
 ### Setup Summary
