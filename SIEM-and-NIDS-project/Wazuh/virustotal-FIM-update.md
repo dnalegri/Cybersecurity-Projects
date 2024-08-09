@@ -14,7 +14,7 @@ Updating the `localrules.xml` on the Wazuh manager and the `ossec.conf` on the W
 - Utilize Suricata to analyze network traffic and detect intrusions.
 - **Add more directories to enhance security posture and coverage.**
 
-### Updating the Configuration on Kali Endpoint
+## Updating the Configuration on Kali Endpoint
 1. Navigate to `/var/ossec/etc/ossec.conf` Add an entry within the <syscheck> block to configure a directory to be monitored in near real-time. In this case, I want to add several critical directories to ensure I'll be notified of any unauthorized changes or modifications:
 ```xml
   <directories realtime="yes">/home/dnalegri/Downloads,/etc,/usr/bin,/usr/sbin,/bin,/sbin,/boot,/var/www,/root,/usr/local/bin,/usr/local/sbin,/opt,/var/log</directories>
@@ -26,7 +26,7 @@ Updating the `localrules.xml` on the Wazuh manager and the `ossec.conf` on the W
       <ignore>/var/log/journal/</ignore>
       <ignore>/var/log/suricata/eve.json</ignore>
 ```
-### Updating the Configuration on the Wazuh Manager (Ubuntu Desktop)
+## Updating the Configuration on the Wazuh Manager (Ubuntu Desktop)
 1. Navigate to `/var/ossec/rules/local_rules.xml`. Update the local_rules to the corresponding directories:
 ```xml
    <!-- New rules for additional directories -->
