@@ -1,26 +1,28 @@
-# class definition
-class Employee:
-    "Common base class for all employees"
-    empCount = 0
+# define class
+class Devices:
+    "Common base class for network devices"
+
+    # variable shared among instances
+    device_count = 0
 
     # class constructor
-    def __init__(self, name, salary):
+    def __init__(self, name, IPaddress):
         self.name = name
-        self.salary = salary
-        Employee.empCount += 1
-    # define member methods
-    def displayCount(self):
-        print("Total Employee:", Employee.empCount)
+        self.IPaddress = IPaddress
+        Devices.device_count += 1
 
-    def displayEmployee(self):
-        print("Name: ", self.name, ", Salary: ", self.salary)
-# create instances by calling Employee()
-"This would create first object of Employee class"
-emp1 = Employee("Zara", 20000)
-"This would create second object of Employee class"
-emp2 = Employee("Manny", 50000)
+    # member methods
+    def displayCount(self):
+        print("Total Devices:", Devices.device_count)
+
+    def displayDevices(self):
+        print("Name: ", self.name, "IP Address: ", self.IPaddress)
+
+# create instances
+dev1 = Devices("Cisco Router", "192.100.0.10")
+dev2 = Devices("Netgear Switch", "10.10.0.29")
 
 # access objects' attributes
-emp1.displayEmployee()
-emp2.displayEmployee()
-print("Total Employee: ", Employee.empCount)
+dev1.displayDevices()
+dev2.displayDevices()
+print("Total Devices: ", Devices.device_count)
