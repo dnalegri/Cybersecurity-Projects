@@ -1,12 +1,13 @@
 # get current working directory
 import os
 pwd = os.getcwd()
-list_directory = os.listdir(pwd)
+print(pwd)
 
+# display files and folders in cwd
+list_directory = os.listdir(pwd)
 for directory in list_directory:
     print('[+]', directory)
-# get sub directories
-# import os
+# use os.walk() to get files and folders
 for root, directories, files in os.walk(".", topdown=False):
     # iterate over the files
     for file_entry in files:
