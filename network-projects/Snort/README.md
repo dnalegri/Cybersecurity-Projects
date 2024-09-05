@@ -50,9 +50,10 @@ During installation, a screen will prompt you to enter the CIDR IP address for t
 
 - Snort alerts us with our rule.
 
-  <img src="https://github.com/user-attachments/assets/af14c08c-b166-41c1-8367-ba7af3c528a5" width=600 />
+<img src="https://github.com/user-attachments/assets/af14c08c-b166-41c1-8367-ba7af3c528a5" width=600 />
 
 3. Make another rule for SSH login attempts.
+
    <img src="https://github.com/user-attachments/assets/3b09e607-8d5d-485a-9451-8535b47d47e9" width=600 />
 
     - The test of the rule below:
